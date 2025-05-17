@@ -14,7 +14,7 @@ const cart = () => {
 
   const fetchData = async () => {
     try {
-      const url = `https://veggie-vibe-api.vercel.app//${user}`;
+      const url = `https://veggie-vibe-api.vercel.app/cart/${user}`;
       const response = await fetch(url);
       const result = await response.json();
       setCart(result.products);
