@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* utility classes */
+
+
+.content{
+    margin-top: 80px;
+}
+
