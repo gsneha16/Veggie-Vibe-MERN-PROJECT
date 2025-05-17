@@ -13,7 +13,7 @@ const Wishlist = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/wishlist/${user}`);
+      const response = await fetch(`https://veggie-vibe-api.vercel.app/wishlist/${user}`);
       const result = await response.json();
       setWishlist(result.products);
 
@@ -35,7 +35,7 @@ const Wishlist = () => {
   const removeWishlistElement = async (e, id) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/wishlist/${user}/${id}`,
+        `https://veggie-vibe-api.vercel.app/wishlist/${user}/${id}`,
         {
           method: "DELETE",
         }

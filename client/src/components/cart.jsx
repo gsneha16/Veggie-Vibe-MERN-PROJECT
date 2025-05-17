@@ -14,7 +14,7 @@ const cart = () => {
 
   const fetchData = async () => {
     try {
-      const url = `http://localhost:8000/cart/${user}`;
+      const url = `https://veggie-vibe-api.vercel.app//${user}`;
       const response = await fetch(url);
       const result = await response.json();
       setCart(result.products);
@@ -34,7 +34,7 @@ const cart = () => {
 
   const deleteProduct = async (e, currId, name) => {
     const response = await fetch(
-      `http://localhost:8000/cart/${user}/${currId}/${name}`,
+      `https://veggie-vibe-api.vercel.app/cart/${user}/${currId}/${name}`,
       {
         method: "DELETE",
       }
@@ -53,7 +53,7 @@ const cart = () => {
   // handle qunatity update increment and decrement
   const updateQuantity = async (id, type) => {
     try {
-      const url = `http://localhost:8000/cart/${type}`;
+      const url = `https://veggie-vibe-api.vercel.app/cart/${type}`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -73,7 +73,7 @@ const cart = () => {
   // post cart data to order
   const cartToOrder = async (myCart) => {
     try {
-      const url = `http://localhost:8000/cart/order/${user}`;
+      const url = `https://veggie-vibe-api.vercel.app/cart/order/${user}`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -94,7 +94,7 @@ const cart = () => {
 
   const fetchOrders = async () => {
     try {
-      const url = `http://localhost:8000/cart/order/${user}`;
+      const url = `https://veggie-vibe-api.vercel.app/cart/order/${user}`;
       const response = await fetch(url);
       const result = await response.json();
       setorder(result.orders);

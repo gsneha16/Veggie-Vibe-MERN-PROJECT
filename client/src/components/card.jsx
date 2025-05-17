@@ -8,7 +8,7 @@ const Card = (props) => {
     const newProduct = { image, name, price };
     setProduct(newProduct);
     try {
-      const response = await fetch("http://localhost:8000/cart", {
+      const response = await fetch("https://veggie-vibe-api.vercel.app/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const Card = (props) => {
     const newProduct = { image, name, price };
     setProduct(newProduct);
     try {
-      const response = await fetch("http://localhost:8000/wishlist", {
+      const response = await fetch("https://veggie-vibe-api.vercel.app/wishlist", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

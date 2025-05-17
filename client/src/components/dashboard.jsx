@@ -27,12 +27,12 @@ const Dashboard = () => {
   }, []);
 
   const handleProfileUpdate = async () => {
-    const url = `http://localhost:8000/profileUpdate/${currUser}`;
+    const url = `https://veggie-vibe-api.vercel.app/profileUpdate/${currUser}`;
     const response = await fetch(url);
     const result = await response.json();
     const email = result.email;
     const date = result.date;
-    const profileUrl = `http://localhost:8000/uploads/${result.profileImg}`;
+    const profileUrl = `https://veggie-vibe-api.vercel.app/uploads/${result.profileImg}`;
     setUser({
       name: currUser,
       email: email,
@@ -50,7 +50,7 @@ const Dashboard = () => {
       console.log("Uploading file:", file);
 
       const res = await axios.post(
-        `http://localhost:8000/profileUpdate/${currUser}`,
+        `https://veggie-vibe-api.vercel.app/profileUpdate/${currUser}`,
         formData,
         {
           headers: {

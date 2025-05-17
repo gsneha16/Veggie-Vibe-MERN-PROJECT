@@ -24,7 +24,7 @@ const signIn = () => {
   const onSubmit = async (data) => {
     setloginInfo(data);
     try {
-      const url = "http://localhost:8000/auth/login";
+      const url = "https://veggie-vibe-api.vercel.app/auth/login";
       const response = await fetch(url, {
         method: "POST",
         headers: {

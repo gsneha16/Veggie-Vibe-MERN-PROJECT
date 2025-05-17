@@ -14,7 +14,7 @@ const OrderHistory = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/orderHistory/${user}`
+        `https://veggie-vibe-api.vercel.app/orderHistory/${user}`
       );
       const result = await response.json();
       setOrderHistory(result.orderHistory || []);

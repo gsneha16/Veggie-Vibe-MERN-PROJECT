@@ -15,7 +15,7 @@ export default function App() {
 
   const fetchOrders = async () => {
     try {
-      const url = `http://localhost:8000/cart/order/${user}`;
+      const url = `https://veggie-vibe-api.vercel.app/cart/order/${user}`;
       const response = await fetch(url);
       const result = await response.json();
       setorders(result.orders);
@@ -36,7 +36,7 @@ export default function App() {
     console.log(orders);
 
     try {
-      const url = `http://localhost:8000/orderHistory`;
+      const url = `https://veggie-vibe-api.vercel.app/orderHistory`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
