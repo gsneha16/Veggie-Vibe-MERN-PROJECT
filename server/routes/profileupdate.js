@@ -35,17 +35,25 @@ router.post("/:user", upload.single("profilePic"), async (req, res) => {
 
     const username = req.params.user;
 
-    await userModel.findOneAndUpdate(
-      { username },
-      { profileImg: result.url },
-      { new: true }
-    );
+    try {
+      await userModel.findOneAndUpdate(
+        { username },
+        { profileImg: result.url },
+        { new: true }
+      );
 
-    res.status(200).json({
-      success: true,
-      message: "Image uploaded successfully",
-      imageUrl: result.url,
-    });
+      res.status(200).json({
+        success: true,
+        message: "Image uploaded successfully",
+        imageUrl: result.url,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Error updating user profile image",
+      });
+    }
   });
 });
 
