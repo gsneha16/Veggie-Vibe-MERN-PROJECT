@@ -27,12 +27,12 @@ const Dashboard = () => {
   }, []);
 
   const handleProfileUpdate = async () => {
-    const url = `https://veggie-vibe-api.vercel.app/profileUpdate/${currUser}`;
+    const url = `http://localhost:8000/profileUpdate/${currUser}`;
     const response = await fetch(url);
     const result = await response.json();
     const email = result.email;
     const date = result.date;
-    const profileUrl = `https://veggie-vibe-api.vercel.app/uploads/${result.profileImg}`;
+    const profileUrl = result.profileImg;
     setUser({
       name: currUser,
       email: email,
@@ -47,10 +47,8 @@ const Dashboard = () => {
     formData.append("username", user.name); // Send userId to backend
 
     try {
-      console.log("Uploading file:", file);
-
       const res = await axios.post(
-        `https://veggie-vibe-api.vercel.app/profileUpdate/${currUser}`,
+        `http://localhost:8000/profileUpdate/${currUser}`,
         formData,
         {
           headers: {
@@ -59,8 +57,12 @@ const Dashboard = () => {
         }
       );
 
-      if (res.status) {
+      if (res.data.success) {
+        toast.success(res.data.message);
         handleProfileUpdate();
+      } else {
+        toast.error(res.message);
+        console.log(res.message);
       }
     } catch (err) {
       console.error(err);
@@ -98,10 +100,7 @@ const Dashboard = () => {
           <div className="flex sm:flex-row bg-white shadow-lg rounded-2xl p-6 gap-6 items-center sm:items-start border border-gray-100 hover:shadow-xl transition-shadow duration-300">
             <img
               className="w-28 h-28 rounded-full border-4 border-gray-500 shadow-md object-cover"
-              src={
-                user.profileImg ||
-                "./defaultAvtar.png"
-              }
+              src={user.profileImg || "./defaultAvtar.png"}
               alt="Profile"
             />
 
