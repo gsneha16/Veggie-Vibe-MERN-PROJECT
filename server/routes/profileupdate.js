@@ -1,6 +1,7 @@
 const userModel = require("../models/user");
 const router = require("express").Router();
-const multer = require("../multer");
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../middlewares/multer");
 
 router.get("/:user", async (req, res) => {
   const username = req.params.user;
@@ -17,31 +18,35 @@ router.get("/:user", async (req, res) => {
     success: true,
     email: email,
     date: signInDate,
-    profileImg:profileImg,
-    message:"User data Fetched successfully"
+    profileImg: profileImg,
+    message: "User data Fetched successfully",
   });
 });
 
-router.post("/:user", multer.single("profilePic"), async (req, res) => {
-  const username = req.params.user;
-  const fileName = req.file.filename; // Log the file information
+router.post("/:user", upload.single("profilePic"), async (req, res) => {
+  cloudinary.uploader.upload(req.file.path, async (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Error uploading image to cloudinary",
+      });
+    }
 
-  try {
+    const username = req.params.user;
+
     await userModel.findOneAndUpdate(
-      { username: username },
-      { profileImg: fileName },
+      { username },
+      { profileImg: result.url },
       { new: true }
     );
 
     res.status(200).json({
       success: true,
-      profilePic: fileName,
-      message: "Profile picture updated",
+      message: "Image uploaded successfully",
+      imageUrl: result.url,
     });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Upload failed" });
-  }
+  });
 });
 
 module.exports = router;
