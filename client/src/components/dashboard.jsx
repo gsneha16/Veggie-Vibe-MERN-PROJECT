@@ -32,6 +32,7 @@ const Dashboard = () => {
     const result = await response.json();
     const email = result.email;
     const date = result.date;
+    console.log(result)
     const profileUrl = result.profileImg;
     setUser({
       name: currUser,
